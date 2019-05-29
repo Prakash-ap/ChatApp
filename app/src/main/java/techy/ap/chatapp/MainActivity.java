@@ -4,6 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -19,7 +24,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import techy.ap.chatapp.Fragment.ChatsFragment;
+import techy.ap.chatapp.Fragment.UserFragment;
 import techy.ap.chatapp.Model.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        TabLayout tabLayout=findViewById(R.id.tablelayout);
+        ViewPager viewPager=findViewById(R.id.viewpager);
+
+        ViewPageAdapter viewPageAdapter=new ViewPageAdapter(getSupportFragmentManager());
+        viewPageAdapter.addFragment(new ChatsFragment(),"chats");
+        viewPageAdapter.addFragment(new UserFragment(),"user");
+
+        viewPager.setAdapter(viewPageAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -80,6 +98,40 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return false;
+    }
+
+    class ViewPageAdapter extends FragmentPagerAdapter{
+        private ArrayList<Fragment>fragments;
+        private ArrayList<String>titles;
+
+        public ViewPageAdapter(FragmentManager fm) {
+            super(fm);
+            this.fragments=new ArrayList<>();
+            this.titles=new ArrayList<>();
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles.get(position);
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            return fragments.get(i);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        public void addFragment(Fragment fragment,String title){
+            fragments.add(fragment);
+            titles.add(title);
+        }
+
+
     }
 
    /* @Override

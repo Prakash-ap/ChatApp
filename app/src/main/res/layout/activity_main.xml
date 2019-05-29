@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
@@ -36,16 +37,36 @@
 
         </android.support.v7.widget.Toolbar>
 
-    </android.support.design.widget.AppBarLayout>
+        <android.support.design.widget.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tablelayout"
+            android:background="@color/colorPrimary"
+            app:tabSelectedTextColor="#fff"
+            app:tabIndicatorColor="#fff"
+            app:tabTextColor="#fff">
 
-   <!-- <TextView
+        </android.support.design.widget.TabLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/text"
-        android:text="Welcome to new chat"
-        android:layout_centerInParent="true"
-        android:textAlignment="center"
-        android:textSize="25sp"
-        />-->
+        android:layout_height="match_parent"
+        android:id="@+id/viewpager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </android.support.v4.view.ViewPager>
+
+
+    <!-- <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:id="@+id/text"
+         android:text="Welcome to new chat"
+         android:layout_centerInParent="true"
+         android:textAlignment="center"
+         android:textSize="25sp"
+         />-->
 
 </LinearLayout>
